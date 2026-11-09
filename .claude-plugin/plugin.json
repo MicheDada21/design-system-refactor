@@ -1,0 +1,10 @@
+{
+  "name": "design-system-refactor",
+  "description": "Refactor a frontend design system with zero visual change: tokens, shared components, guardrails, in any framework. Use when the user asks to refactor or clean up a design system, theme, tokens or component library, or to remove hardcoded styles and duplicated UI.",
+  "author": {
+    "name": "Tiziano Boccaccini"
+  },
+  "homepage": "https://www.cryptohelvetia.com/ch-labs/prompt-library/skills/design-system-refactor",
+  "repository": "https://github.com/MicheDada21/design-system-refactor",
+  "license": "MIT"
+}
