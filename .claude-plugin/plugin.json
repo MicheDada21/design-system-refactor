@@ -1,6 +1,6 @@
 {
   "name": "design-system-refactor",
-  "description": "Refactor a frontend design system with zero visual change: tokens, shared components, guardrails, in any framework. Use when the user asks to refactor or clean up a design system, theme, tokens or component library, or to remove hardcoded styles and duplicated UI.",
+  "description": "Moves hardcoded styles into tokens and repeated UI into shared components, proving every page stays pixel-identical. Use when cleaning up a design system, theme or component library in any framework.",
   "author": {
     "name": "Tiziano Boccaccini"
   },
