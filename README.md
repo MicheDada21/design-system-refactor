@@ -2,7 +2,7 @@
 
 Sposta gli stili scritti a mano nei token e l'interfaccia ripetuta in componenti condivisi, con la prova che ogni pagina resta identica al pixel.
 
-Fa parte della [Prompt Library di CH Labs](https://www.cryptohelvetia.com/ch-labs/prompt-library), dove la pagina di riferimento è [Refactor a design system without visual changes](https://www.cryptohelvetia.com/ch-labs/prompt-library/skills/design-system-refactor). Il repo contiene una copia della skill, rigenerata a ogni aggiornamento della libreria.
+Fa parte della [Prompt Library di CH Labs](https://www.cryptohelvetia.com/ch-labs/prompt-library), dove la pagina di riferimento è [Design system refactor](https://www.cryptohelvetia.com/ch-labs/prompt-library/skills/design-system-refactor). Il repo contiene una copia della skill, rigenerata a ogni aggiornamento della libreria.
 
 ## Installare
 
