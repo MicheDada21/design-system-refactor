@@ -1,11 +1,11 @@
 ---
 name: design-system-refactor
-description: "Moves hardcoded styles into tokens and repeated UI into shared components, proving every page stays pixel-identical. Use when cleaning up a design system, theme or component library in any framework."
+description: "Moves hardcoded styles into tokens and repeated UI into shared components, preserving appearance, behavior and accessibility. Use when cleaning up a design system, theme or component library in any framework."
 ---
 
 # Design system refactor
 
-A refactor changes the code and keeps the result pixel-identical: same pixels, focus rings, keyboard paths and accessible names. Design improvements become notes for the user. Aim for the smallest change that meets the intent.
+A refactor changes the code while preserving the visible design, focus states, keyboard paths and accessible names. Design improvements become notes for the user unless separately requested. Aim for the smallest change that meets the intent.
 
 ## Modes
 
@@ -22,17 +22,17 @@ Pick the mode from the request. With no mode named, run them in this order.
 ## Rules for every mode
 
 - Before deciding anything, read `DESIGN.md`, the theme or token files and two neighboring components. Match their naming, file layout and export style.
-- Work one area at a time. An area is a route, feature folder or component family. Convert every call site in it, verify, then commit.
-- Run the project's lint, typecheck, tests and build before the first edit (the baseline) and after each area. Each area ends green.
-- Each area ends with the visual check at 0 pixels of difference.
-- Hand heavy reading and each area's edits to fresh-context helper agents, one writing helper at a time. Give each helper the interview decisions, the area's file list and the pixel-identical rule. The main session coordinates and verifies.
+- Work one area at a time. An area is a route, feature folder or component family. Convert every call site in it and verify before starting the next; follow the project's delivery policy for commits.
+- Establish a baseline with the project's existing lint, typecheck, test and build commands. Rerun relevant checks after each area; report unavailable or skipped checks.
+- Each area ends with checks for meaningful visual regressions and unchanged interaction and accessibility, within the project's authorized verification workflow.
+- When delegation is available and authorized, hand heavy reading and each area's edits to fresh-context helper agents, one writing helper at a time. Give each helper the interview decisions, the area's file list and the preservation rule. The main session coordinates and verifies.
 
 ## Audit
 
 Run as a read-only helper. Collect:
 
 1. Every literal design value (color, spacing, font size, weight, line height, radius, shadow, z-index, duration, easing, breakpoint) with its count and files.
-2. Drift: groups of near-identical values (`#cfcfcf` and `#d0d0d0`, `13px` and `0.8125rem`). Drift values stay distinct, since merging them changes pixels; report them for a later design pass.
+2. Drift: groups of near-identical values (`#cfcfcf` and `#d0d0d0`, `13px` and `0.8125rem`). Keep drift values distinct during the refactor; report possible consolidation for a later design pass.
 3. Markup or class strings repeated 3 or more times.
 4. Several implementations of one concept (three button styles, two card shells).
 5. Library primitives (shadcn, Radix, MUI and similar) copied and edited in place.
@@ -50,13 +50,15 @@ Hand the inventory to the main session with a proposed area order: shared founda
 
 ## Visual check
 
-For each route in the area, before the first edit and after the last:
+Follow the user's and project's browser policy. When browser checks are authorized, reuse the project's runner or browser tooling and compare representative routes before and after at desktop and mobile widths. Include supported themes and touched hover, focus and open states where relevant. Wait for fonts, images and motion to settle.
 
-1. Capture screenshots at 1440 px and 390 px wide, in light and dark themes when the project has both, plus hover and focus states of the touched components. Use the project's visual test runner when one exists; otherwise the built-in browser or `bunx playwright screenshot`.
-2. Compare each pair pixel by pixel, for example `bunx pixelmatch before.png after.png diff.png 0`. The check passes at 0 different pixels.
-3. Compare the accessibility tree and tab order of the touched components.
+Judge whether layout, spacing, typography, colors, imagery and responsive behavior remain visually equivalent. Use pixel diffs to locate suspicious changes when useful; a nonzero count alone is not a failure. Ignore harmless antialiasing, subpixel rounding and image-rasterization noise when the rendered design and relevant computed styles agree. No universal pixel threshold is required.
 
-On a difference, find the edit that caused it, fix it and check again. After 3 failed rounds, revert the area and report the cause.
+Check the touched controls' accessible names, roles, states, focus visibility and keyboard order, using accessibility snapshots or focused interaction checks when available.
+
+Pass the refactor when no unintended visible changes remain and touched controls retain their behavior and accessibility. Investigate meaningful differences in the touched area and fix actual regressions. Bound diagnosis to three focused rounds; stop early when only rendering noise remains. Revert the affected change only for an unresolved functional or visible regression, and report it.
+
+If browser checks are unavailable or disallowed, complete the permitted code and project checks and state that visual equivalence was not directly verified.
 
 ## Final report
 
